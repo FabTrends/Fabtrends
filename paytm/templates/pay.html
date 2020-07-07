@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% load i18n %} 
+<div class="row">
+<div class="parallax1" id="image">
+<div class="col-md-12">
+<div  width="100%">
+
+        <p id="mostly" style="top:90px;">ORDER NOW</p>
+		
+		</div>
+
+</div>
+</div>
+</div>
+<div class="row" style="background:rgba(230, 232, 230,0.4);">
+   
+    
+    <form method="post" action='/paytm/payment/'>
+        {% csrf_token %}
+                
+				 <div class="col-md-8 col-md-offset-2">
+        <div class="row" style="margin-top: 5%;background:white;">
+               
+                   
+					
+            <table class="table table-hover">
+                <thead style="font-family:Arial Rounded MT;color:black;text-align:center;font-size:16px;">
+		
+                    <tr style="font-color:white; text-align:center;">
+                        <th>Product Image</th>
+                        <th>Product Brand</th>
+                        <th>Product Name</th>
+                        <th>Quantity</th>
+						<th>Item Price</th>
+                        <th>Item Offer Price</th>
+                        <th>Item  total Price</th>
+                        
+                    </tr>
+                </thead>
+				{% for item in cart %}
+                <tbody>
+			 
+                    <tr>
+					
+                   <td> <img src="/media/{{ item.product.image }}" style="width:160px;height:120px;" alt=" " class="img-responsive"/></td>
+                
+		
+                   
+                    <td style="margin-left:20px;margin-right:40px;">{{ item.product.productbrand }}</td>
+					<td style="margin-left:20px;margin-right:40px;">{{ item.product.name }}</td>
+					<td style="margin-left:20px;margin-right:40px;">{{ item.quantity }}</td>
+                    <td style="margin-left:20px;margin-right:40px;">Rs. {{ item.product.discounted_price }}</td>
+             
+             
+                    <td style="margin-left:20px;margin-right:40px;">Rs. {{ item.product.price }}</td>
+                <td id="cart6">Rs. {{ item.total_price }}</td>
+                   
+                </tr>
+				 {% endfor %}
+                
+</tbody>
+
+            </table>
+                <li class="list-group-item active" style="color:white; font-size:22px;background:black;">Total Cost: <p style="float:right;margin-right:40px;">Rs. {{ cart.get_total_price }}</p></li>   
+			 </div>
+<br>
+
+            </div><br><input type="hidden" name="email" value="{{ order.email }}">
+        <input type="hidden" name="oid" value="{{ order.id }}">
+		<input type="hidden" name="amount" value="{{ cart.get_total_price  }}" ><br>
+        <input type="submit" name="submit" value="PAY NOW" class="btn btn-info" style="padding:8px 70px 8px 70px;margin-left:41%;font-size:18px;font-family:Arial Rounded MT;" required>
+		
+  
+  </form>
+  
+	<form method="post" action='/paytm/created/'>
+	{% csrf_token %}
+	<input type="submit" name="submit" value="Cash on Delivery" class="btn btn-info" style="padding:8px 40px 8px 40px;margin-left:41%;font-size:18px;font-family:Arial Rounded MT;margin-top:0%;" required><br>
+	</form>
+</div>
+
+
+  
+	
+{% endblock %}

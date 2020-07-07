@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+ 
+ <div class="row text-center mainheading">
+<h1>Categories</h1>
+</div>
+ 
+<div id="gift" class="row text-center">
+{% for category in object_list %}
+<a href="/product/{{ category.id }}">{{ category.name }}</a>
+{% endfor %}
+
+<!---<div class="col-md-4" id="gift1">
+<a href="/product/men"><h1>FOR MEN</h1>
+<img src="{% static 'img/men.jpg' %}" height="500px" width="100%" / >
+</a>
+</div>
+<div class="col-md-4" id="gift2">
+<a href="/product/women"><h1>FOR WOMEN</h1>
+<img src="{% static 'img/women1.jpg' %}" height="500px" width="100%" />
+</a>
+</div>
+<div class="col-md-4" id="gift3">
+<a href="/product/kids"><h1>FOR KIDS</h1>
+<img src="{% static 'img/kid.jpg' %}" height="500px" width="100%" />
+</a>
+</div>-->
+</div>
+{% endblock %}

@@ -1,0 +1,289 @@
+{% load static %}
+<html>
+<head>
+<title>FabTrends Women's Shopping Mart</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="{% static 'images/logo.png' %}" type="image/x-icon">
+<link rel="stylesheet" type="text/css" href="{% static 'bootstrap-3.4.1-dist/css/bootstrap.min.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'bootstrap-3.4.1-dist/Font-Awesome-master/Font-Awesome-master/css/fontawesome.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'bootstrap-3.4.1-dist/Font-Awesome-master/Font-Awesome-master/css/all.css' %}">
+<link href="{% static 'style1.css' %}" type="text/css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="{% static 'slider/JiSlider.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'bootstrap-3.4.1-dist/flexslider.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'bootstrap-3.4.1-dist/fasthover.css' %}">
+<script src ="{% static 'bootstrap-3.4.1-dist/jquery.js' %}"></script>
+<script src ="{% static 'bootstrap-3.4.1-dist/js/bootstrap.min.js' %}"></script>
+<script  type= "text/javascript" src= "{% static 'slider/JiSlider.js' %}"></script>
+</head>
+<body><!--Navbar-->
+<!--/.Navbar-->
+<a id="buttonstore"><i class="fa fa-arrow-up" aria-hidden="true"></i></a>
+<!-- Back to top button -->
+<!-- begin topbar-->
+<div class="container-fluid">
+		<div class="row" id="header">
+                <div class="col-md-3">
+			    <a href="/product/11/" class="btn btn-info" id="button1" style="border:none;">Offer of the day</a>
+			</div>
+			<div class="col-md-9">
+           <nav class="navbar-inverse" id="nav">
+			   <ul class="nav navbar-nav" style="background:black;">
+			  
+{% if user.is_authenticated %}
+        <li class="dropdown">
+          <a class="nav-link dropdown-toggle nav-item" data-toggle="dropdown"><i class="fa fa-user" aria-hidden="true"></i>
+            {{request.user.username}}<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+		  <li><a href="{% url 'fabtrendapp:edit_profile' %}" style="color:black !important;"><i class="fa fa-user"
+              aria-hidden="true"></i>Edit Profile</a></li> 
+			  <li><a href="{% url 'fabtrendapp:change_password' %}" style="color:black !important;"><i class="fa fa-lock"
+              aria-hidden="true"></i>Change Password</a></li>
+            <li class="nav-item"><a href="{% url "wishlists:my_wishlists"%}" style="color:black !important;"><i class="fa fa-heart"></i>My Wishlist</a></li>
+<li class="nav-item"><a href="{% url 'orders:order_create' %}" style="color:black !important;"><i class="fas fa-shopping-basket"></i>Checkout</a></li>
+<li class="nav-item"><a href="{% url 'fabtrendapp:feedback' %}" style="color:black !important;"><i class="fas fa-comments"></i>Feedback</a></li>
+<li class="nav-item"><a href="{% url 'orders:refund-view' %}" style="color:black !important;"><i class="fa fa-shopping-bag"></i>Refund</a></li>
+ <li class="nav-item"><a href="{% url "cart:cart_detail" %}" style="color:black !important;">
+	<i class="fas fa-shopping-cart" style="color:black;"></i>Your Cart
+	{% with total_items=cart|length %}
+                    {% if cart|length > 0 %}
+              [{{ total_items }}]
+                        {% else %}
+                       [0]
+                    {% endif %}
+                {% endwith %}
+
+       </a></li>    
+          </ul>
+        </li>
+    <li><a class="list" href="{% url 'fabtrendapp:logout' %}"> <i class="fa fa-key" aria-hidden="true"></i>logout</a></li>
+{% else %}
+<li><a href="{% url 'fabtrendapp:register' %}"><i class="fa fa-user-plus"></i>Signup</a></li>
+<li><a href="{% url 'fabtrendapp:login' %}"><i class="fa fa-unlock-alt"></i>Login</a></li>
+{% endif %}
+				<li class="list"><a href="{% url 'fabtrendapp:about' %}"><i class="fas fa-user-alt"></i>About Us</a></li>
+				<li class="list"><a href="{% url 'fabtrendapp:contact' %}"><i class="fas fa-user-tie"></i>Contact Us</a></li>
+				
+				
+				<li class="list"><a href="{% url 'fabtrendapp:query' %}"><i class="fa fa-question-circle"></i>Query</a></li>
+				
+
+			    </ul>
+			</nav>
+		</div>
+</div>
+<!--end topbar-->
+
+<!--begin topbar-->
+<div class="row">
+<ul id="navbar">
+	<div class="col-md-2">
+<a href="{% url 'fabtrendapp:index' %}"><img src="{% static 'images/title2.png' %}" id="img"/></a>
+</div>
+<div class="col-md-10" id="header1">
+
+	<li> <a href="{% url 'fabtrendapp:index' %}"><span class="home">HOME</span></a></li>
+	
+	
+	{% for category in cat %}
+	
+	<li class="dropdown">
+			<a class="dropbtn" href="#">{{ category }}<i class="fa fa-caret-down" style=""></i></a>
+			<div class="dropdown-content">
+			{% for subcat in category.subcategory.all %}
+			<a href="/product/{{ subcat.id }}">{{ subcat.name }}</a>
+			{% endfor %}	
+			</div>
+		</li>
+	{% endfor %}
+	
+	
+	
+		<!--<li class="dropdown">
+			<a class="dropbtn" href="{% url 'fabtrendapp:categorylist' %}">CLOTHING<i class="fa fa-caret-down" style=""></i></a>
+			<div class="dropdown-content">
+			<div class="col-md-6">
+			<a href="">Kurties</a>
+				<a href="">Suits</a>
+				<a href="">Dresses</a>
+				<a href="">Top & Shirts</a>
+				</div>
+				<div class="col-md-6">
+				<a href="">Trousers</a>
+				<a href="">Jeans</a>
+				<a href="">Gowns</a>
+				<a href="">JumpSuit</a>
+				</div>
+			</div>
+		</li>
+		<li class="dropdown">
+			<a class="dropbtn" href="{% url 'fabtrendapp:categorylist' %}">FOOTWEAR<i class="fa fa-caret-down" style=""></i></a>
+			<div class="dropdown-content">
+				<a href="#">Heels</a>
+				<a href="#">Wedges</a>
+				<a href="#">Ballerinas</a>
+				<a href="#">Shoes</a>
+				<a href="#">Flip-Flops</a>
+				<a href="#">Sandals</a>
+			</div>
+		</li>
+		<li class="dropdown">
+			<a class="dropbtn" href="{% url 'fabtrendapp:categorylist' %}">JEWELLERY<i class="fa fa-caret-down" style=""></i></a>
+			<div class="dropdown-content">
+				<a href="#">Nacklace & sets</a>
+				<a href="#">Earrings</a>
+				<a href="#">Rings</a>
+				<a href="#">Head Jewellery</a>
+				<a href="#">Watches</a>
+				<a href="#">Bangle Bracelet</a>
+			</div>
+		</li>
+		<li class="dropdown">
+			<a class="dropbtn" href="{% url 'fabtrendapp:categorylist' %}">COSMATICES<i class="fa fa-caret-down" style=""></i></a>
+			<div class="dropdown-content">
+				<a href="#">Eye Makeup</a>
+				<a href="#">Face makeup</a>
+				<a href="#">Lip Accessory</a>
+				<a href="#">Nail Accessory</a>
+			</div>
+	</li>-->
+
+		<div id="wrap">
+		<form action="/search/" autocomplete="on" method="get">
+		{% csrf_token %}
+  		<input id="search" name="q" type="text" placeholder="What're we looking for ?">
+  		<button class="searchButton" value="Rechercher" type="submit"><i class="fas fa-search"></i></button>
+  		</form>
+		</div>
+		
+		 <a href="{% url "cart:cart_detail" %}" style="color:white;">
+	<button class="cartButton"><i class="fas fa-shopping-cart"></i>{% with total_items=cart|length %}
+                    {% if cart|length > 0 %}
+              [{{ total_items }}]
+                        {% else %}
+                       [0]
+                    {% endif %}
+                {% endwith %}
+	</button>
+       </a>
+</div>
+</ul>
+</div>
+
+{% block content %}
+{% endblock %}
+
+
+
+<!--begin footer -->
+<div class="row">
+	<div class="footer" style="padding-bottom:20px;">
+		<div class="container">
+				<div class="col-md-3">
+					<h4 class="hammer5">Contact</h4>
+					<ul class="address">
+						<li> Jass Makkar</li>
+						<li>Bathinda</li>
+						<li>makkar62@gmail.com</li>
+						<li>98559-99322</li>
+					</ul>
+				</div>
+				<div class="col-md-3">
+					<h4 class="hammer5">Information</h4>
+					<ul class="info">
+						<li><a href="{% url 'fabtrendapp:about' %}">Contact Us</a></li>
+						<li><a href="{% url 'orders:order_create' %}">Checkout</a></li>
+					  
+						<li><a href="{% url 'fabtrendapp:faqs' %}">FAQs</a></li>
+						<li><a href="{% url 'fabtrendapp:privacy' %}">Privacy policy</a></li>
+						<li><a href="{% url 'fabtrendapp:about' %}">About</a></li>
+						<li><a href="{% url 'fabtrendapp:feedback' %}">Feedback</a></li>
+						<li><a href="{% url 'fabtrendapp:query' %}">Query</a></li>
+					</ul>
+				</div>
+				<div class="col-md-3">
+					<h4 class="hammer5">Category</h4>
+					<ul class="info">
+						<li><a href="dresses.aspx">Dresses</a></li>
+										<li><a href="/product/1/">Kurtas</a></li>
+										<li><a href="/product/5/">Jeans</a></li>
+										<li><a href="/product/3/">Top & Shirts</a></li>
+                                        <li><a href="/product/6/">Palazoo & leggings</a></li>
+                                        <li><a href="/product/26/">Belts</a></li>
+                                        <li><a href="/product/20/">Lipstick</a></li>
+					</ul>
+				</div>
+				<div class="col-md-3">
+					<h4 class="hammer5">Category</h4>
+					<ul class="info">
+						<li><a href="/product/18/">Flats & Sandals</a></li>
+						<li><a href="/product/17/">Wedges</a></li>
+						<li><a href="/product/14/">Heels</a></li>
+						<li><a href="/product/16/">Flip-Flip-Flops</a></li>
+						<li><a href="/product/27/">Ballerinas</a></li>
+						<li><a href="/product/15/">Shoes</a></li>
+						<li><a href="/product/11/">Rings</a></li>
+					</ul>
+					
+				</div>
+			</div>
+		</div>
+		</div>
+</div>
+<!--end footer -->
+
+
+</body>
+<script>
+$(document).ready(function() { 
+$('#JiSlider').JiSlider({
+auto: true,
+autocontrols: true,
+});
+});
+</script>
+<script>
+$(document).ready(function() { 
+window.onscroll = function() {myFunction()};
+
+var navbar = document.getElementById("navbar");
+var sticky = navbar.offsetTop;
+
+function myFunction() {
+  if (window.pageYOffset >= sticky) {
+    navbar.classList.add("sticky")
+  } else {
+    navbar.classList.remove("sticky");
+  }
+}
+});
+</script>
+<script>
+$(document).ready(function() {
+$("#success-alert").hide();
+$("#myWish").click(function showAlert() {
+$("#success-alert").fadeTo(2000, 500).slideUp(500, function() {
+$("#success-alert").slideUp(500);
+    });
+  });
+});
+</script>
+
+<script>
+var btn = $('#buttonstore');
+
+$(window).scroll(function() {
+  if ($(window).scrollTop() > 300) {
+    btn.addClass('show');
+  } else {
+    btn.removeClass('show');
+  }
+});
+
+btn.on('click', function(e) {
+  e.preventDefault();
+  $('html, body').animate({scrollTop:0}, '300');
+});
+
+</script>
+

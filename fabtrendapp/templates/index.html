@@ -1,0 +1,421 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+{% for message in messages %}
+        <div class="alert alert-success" role="alert">
+            <strong>Message: </strong>{{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endfor %}
+<div class="row">
+	<div id="JiSlider" class="jislider">
+		<ul>
+			<li><img src="{% static 'images/banner1.jfif' %}">
+				<div class="text2">
+					<h4 style="font-size:80px">FABTRENDS<br></h4>
+				</div>
+			</li>
+			<li><img src="{% static 'images/banner16.jpg' %}">
+				<div class="text3">
+					<h4 style="font-size:60px">MakeUp Products<br></h4>
+				</div>
+				<p  class="sbutton2">30% off</p>
+			</li>
+			<li><img src="{% static 'images/banner85.jpg' %}" alt="">
+				<div class="text4">
+					<h4 style="font-size:60px">Trending Wedding Dresses<br></h4>
+				</div>
+				<button href="/product/8/" class="sbutton3">Explore more</button>
+			</li>
+			<li><img src="{% static 'images/ban83.jpg' %}" alt="">
+				<h1 class="text1">2020</h1>
+				<div class="text5">
+					<h4 style="font-size:80px"> New Fashion Collection<br></h4>
+				</div>
+				
+			</li>
+			<li><img src="{% static 'images/banner2311.jpg' %}" alt="">
+				<div class="text2">
+					<h4 style="font-size:60px">Footwear Trends <br></h4>
+				</div>
+				<a href="/product/18/"><button  class="sbutton4">SHOP NOW</button></a></li>
+			<li><img src="{% static 'images/banner81.jpg' %}" alt=""></li>
+			<li><img src="{% static 'images/banner84.jpg' %}" alt=""></li>
+		</ul>
+	</div>
+</div>
+<!--end slider -->
+
+<!-- begin two images first row -->
+<div class="row">		
+	<div class="col-md-6">
+        <div class="single_catagory_area d-flex align-items-center bg-img" id="imag31">
+			<div class="catagory-content">
+                <h6 id="access" style="font-size:20px"><br><br><br>On Accesories</h6>
+                <h2 id="sale">Sale 30%</h2>
+                <a href="/product/26/" class="btn karl-btn" id="btn2">SHOP NOW</a>
+            </div>
+        </div>
+	</div>
+	<div class="col-md-6">
+        <div class="single_catagory_area d-flex align-items-center bg-img" id="imag32">
+            <div class="catagory-content">
+				<h6 id="access"><br><br><br>in Bags excepting the new collection</h6>
+                <h2 id="sale">Designer bags</h2>
+                <a href="/product/24/" class="btn karl-btn" id="btn2">SHOP NOW</a>
+            </div>
+		</div>
+    </div>
+</div>
+<!-- end two images first row -->
+
+<!--  begin New Offers row -->
+<div class="row" id="offers3">
+	<p>---------- NEW OFFERS ----------</p>
+</div>
+<div class="row" id="more1">
+	<div class="col-md-3">
+		<div class="flip-box">
+			<div class="flip-box-inner">
+				<div class="flip-box-front">
+					<img src="{% static 'images/dress1.jpg' %}" height="450px" width="300px" />
+				</div>
+				<div class="flip-box-back">
+					<img src="{% static 'images/dress5.jpg' %}" height="450px" width="300px"/>
+				</div>
+			</div>
+				<h3 id="printed">Printed Maxi Dresses</h3>
+				<a href="/product/8/" id="printed1">Shop The Trend</a>
+		</div>
+	</div>
+	<div class="col-md-3">
+		<div class="flip-box">
+			<div class="flip-box-inner">
+				<div class="flip-box-front">
+					<img src="{% static 'images/dress2.jpg' %}" height="450px" width="320px" />
+				</div>
+				<div class="flip-box-back">
+					<img src="{% static 'images/dress6.jpg' %}" height="450px" width="320px"/>
+				</div>
+			</div>
+				<h3 id="printed">Plazzo & Gharara Suit</h3>
+				<a href="/product/6/" id="printed1">Shop The Trend</a>
+		</div>
+	</div>
+	<div class="col-md-3">
+		<div class="flip-box">
+			<div class="flip-box-inner">
+				<div class="flip-box-front">
+					<img src="{% static 'images/dress3.jpg' %}" height="450px" width="320px" />
+				</div>
+				<div class="flip-box-back">
+					<img src="{% static 'images/dress4.jpg' %}" height="450px" width="320px"/>
+				</div>
+			</div>
+				<h3 id="printed"> Trendings JumpSuits</h3>
+				<a href="/product/4/" id="printed1">Shop The Trend</a>
+		</div>
+	</div>
+	<div class="col-md-3">
+		<div class="flip-box">
+			<div class="flip-box-inner">
+				<div class="flip-box-front">
+					<img src="{% static 'images/dress7.jpg' %}" height="450px" width="325px" />
+				</div>
+				<div class="flip-box-back">
+					<img src="{% static 'images/dress8.jpg' %}" height="450px" width="325px"/>
+				</div>
+			</div>
+			<h3 id="printed">Partiwear Designer Dresses</h3>
+			<a href="/product/8/" id="printed1">Shop The Trend</a>
+		</div>
+	</div>
+</div>
+<!--end new offers row-->
+<br>
+<div class="row">
+<div class="col-md-12">
+<a href="/product/3/"><img src="{% static 'banner82.jpg' %}" style="width:100%;height:400px;"></a>
+</div>
+</div>
+<!--begin latest offers row-->
+<div class="row" id="offers">
+<p>---------- LATEST OFFERS ----------</p>
+</div>
+<div class="row" id="more">
+<div class="col-md-3">
+  <div class="content">
+    <a href="" target="_blank">
+      <div class="content-overlay"></div>
+      <img class="content-image" src="{% static 'images/z3.jpg' %}" height="350px" width="300px">
+      <div class="content-details fadeIn-bottom">
+        <h3 class="content-title">Dresses</h3>
+        <p class="content-text">New Arrivals</p>
+		<a href="/product/8/"><p id="seemore">See More</p></a>
+      </div>
+    </a>
+  </div>
+</div>
+<div class="col-md-3">
+  <div class="content">
+    <a href="" target="_blank">
+      <div class="content-overlay"></div>
+      <img class="content-image" src="{% static 'images/ba1.jpg' %}" height="350px" width="300px">
+      <div class="content-details fadeIn-top">
+        <h3>Bangles</h3>
+        <h3>New Arrivals</h3>
+        <a href="/product/13/"><p id="seemore">See More</p></a>
+      </div>
+    </a>
+  </div>
+</div>
+<div class="col-md-3">
+  <div class="content">
+    <a href="" target="_blank">
+      <div class="content-overlay"></div>
+      <img class="content-image" src="{% static 'images/z22.jpg' %}" height="350px" width="300px">
+      <div class="content-details fadeIn-left">
+        <h3>Kurtas</h3>
+        <h3>New Arrivals</h3>
+       <a href="product/1/"> <p id="seemore">See More</p></a>
+      </div>
+    </a>
+  </div>
+</div>
+<div class="col-md-3">
+  <div class="content">
+    <a href="" target="_blank">
+      <div class="content-overlay"></div>
+      <img class="content-image" src="{% static 'images/watches1.jpg' %}" height="350px" width="300px">
+      <div class="content-details fadeIn-right">
+        <h3>Watches</h3>
+        <h3>New Arrivals</h3>
+         <a href="product/23/"><p id="seemore">See More</p></a>
+      </div>
+    </a>
+  </div>
+</div>
+</div>
+<div class="row" id="sum">
+<div class="col-md-3">
+  <div class="content">
+    <a href="" target="_blank">
+      <div class="content-overlay"></div>
+      <img class="content-image" src="{% static 'images/b56.jpg' %}" height="350px" width="300px">
+      <div class="content-details fadeIn-top fadeIn-left">
+        <h3>Ballerinas</h3>
+        <h3>New Arrivals</h3>
+         <a href="/product/27/"><h3 id="seemore">See More</h3></a>
+      </div>
+    </a>
+  </div>
+</div>
+
+<div class="col-md-3">
+  <div class="content">
+    <a href="" target="_blank">
+      <div class="content-overlay"></div>
+      <img class="content-image" src="{% static 'images/e8.jpg' %}" height="350px" width="300px">
+      <div class="content-details fadeIn-top fadeIn-right">
+        <h3>Earings</h3>
+        <h3>New Arrivals</h3>
+         <a href="/product/12/"><p id="seemore">See More</p></a>
+      </div>
+    </a>
+  </div>
+</div>
+<div class="col-md-3">
+  <div class="content">
+    <a href="https://unsplash.com/photos/HkTMcmlMOUQ" target="_blank">
+      <div class="content-overlay"></div>
+      <img class="content-image" src="{% static 'images/t30.jpg' %}" height="350px" width="300px">
+      <div class="content-details fadeIn-bottom fadeIn-left">
+        <h3>Jeans Top</h3>
+        <h3>New Arrivals</h3>
+        <a href="/product/5/"> <p id="seemore">See More</p></a>
+      </div>
+    </a>
+  </div>
+</div>
+<div class="col-md-3">
+  <div class="content">
+    <a href="https://unsplash.com/photos/HkTMcmlMOUQ" target="_blank">
+      <div class="content-overlay"></div>
+      <img class="content-image" src="{% static 'images/rings3.jpg' %}" height="350px" width="300px">
+      <div class="content-details fadeIn-bottom fadeIn-right">
+        <h3>Rings</h3>
+        <h3>New Arrivals</h3>
+         <a href="/product/11/"><p id="seemore">See More</p></a>
+      </div>
+    </a>
+  </div>
+</div>
+</div>
+<!--begin latest offers row-->
+
+<!--begin fabtrends polices-->
+<div class="row" id="offers3">
+<p>---------- FABTRENDS POLICES ----------</p>
+</div>
+<div class="container">
+	<div class="row" id="content">
+		<div class="col-md-12">
+			<div class="col-md-4 threedivs">
+				<i class="fas fa-truck" style="font-size:100px;"></i>
+				<h4 id="shipping">Free Shipping</h4>
+				<p> Buy free shipping online at best price in India with facility of Free Shipping and Cash on Delivery (COD) available.free shipping offers the combo packs and Some catagories is eligible for free shipping.Free 7-day shipping for Prime members<Br> </p>
+			</div>
+			<div class="col-md-4 threedivs">
+				<i class="fas fa-rupee-sign" style="font-size:100px;"></i>
+				<h4 id="shipping">100% Money Refund </h4>
+				<p>We're so convinced you'll use service, that we're willing to offer you an unconditional and risk-free 7-day money-back guarantee. If at any time within 7 days of making the purchase you are unhappy, simply we'll refund your money.</p>
+			</div>
+			<div class="col-md-4 threedivs">
+				<i class="fas fa-comment-dots" style="font-size:100px;"></i>
+				<h4 id="shipping">Customer support 24/7</h4>
+				<p> 24-hour operation can set your business up to build an enduring competitive advantage that makes customers fall in love. By gathering information and asking the right questions upfront support that works for customers.</p>
+			</div>
+		</div>
+	</div>
+</div>
+<!--end fabtrends polices-->
+<br>
+<!-- begin navtabs-->
+
+<div class="row" id="offers3">
+<p>---------- TRENDING OFFERS -----------</p>
+</div>
+
+<div class="row" id="hammer3">		
+<div class="col-md-4">
+    <div class="hovereffect">
+        <img src="{% static 'images/oil1.jpg' %}" id="img22">
+        <div class="overlay">
+           <h3 id="access1">SUMMER OFFERS</h3>
+           <p id="sale1">Discount 50%</p>
+          <a href="/product/3/"><Button id="btn3">Shop Now</button></a>
+        </div>
+    </div>
+</div>
+<div class="col-md-4">
+    <div class="hovereffect">
+        <img src="{% static 'images/hammer.jpg' %}" id="img21">
+        <div class="overlay">
+           <h2 id="acess1">Snazzy Offers</h2>
+		   <p id="sale1">Discount 30%</p>
+           <a href="/product/2/"><Button id="btn3">Shop Now</button></a>
+        </div>
+    </div>
+</div>
+<div class="col-md-4">
+    <div class="hovereffect">
+        <img src="{% static 'images/banner100.jpg' %}" id="img23">
+        <div class="overlay">
+           <h2>Party Dresses Offers</h2>
+           <p id="sale1">Discount 20%</p>
+			<a href ="/product/8/"> <Button id="btn3">Shop Now</button></a>
+        </div>
+    </div>
+</div>
+</div>
+
+<!--end  trending offers-->
+
+
+<!--begin carousel top-->
+<div class="row" id="offers3">
+<p>---------- SALE -----------</p>
+</div>
+<div class="row">
+		<div class="col-md-12">
+			<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="4000">
+			<ol class="carousel-indicators">
+				<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				<li data-target="#myCarousel" data-slide-to="1"></li>
+				
+			</ol>   
+			<div class="carousel-inner">
+				<div class="item carousel-item active">
+					<div class="row">
+						<a href="/product/22/"><div class="col-sm-3">
+							<img src="{% static 'hhjhjhj.jpg' %}" style="width:300px;height:380px;">	
+							<div class="centered">NAIL PAINT</div>
+	</div></a>
+						<a href="/product/5/"><div class="col-sm-3">
+							<img src="{% static 'jgjhgjh.jpg' %}" style="width:300px;height:380px;">
+							<div class="centered">JEANS</div>
+						</div>	</a>	
+						<a href="/product/12/"><div class="col-sm-3">
+							<img src="{% static 'nxcbvncn.jpg' %}" style="width:300px;height:380px;">
+							<div class="centered">EARRINGS</div>
+						</div>		</a>						
+						<div class="col-sm-3">
+							<a href="/product/20/"><img src="{% static 'nnmvdnv.jpg' %}" style="width:300px;height:380px;">
+							<div class="centered">LIPSTICK</div></a>
+						</div>
+					</div>
+				</div>
+	
+				<div class="item carousel-item">
+					<div class="row">
+						<a href="/product/3/"><div class="col-sm-3">
+							<img src="{% static 'nbcvncjkv.jpg' %}" style="width:300px;height:380px;">	
+<div class="centered">SHIRTS</div>							
+						</div></a>
+					<a href="/product/19/">	<div class="col-sm-3">
+							<img src="{% static 'ncxbncbnx.jpg' %}" style="width:300px;height:380px;">
+							<div class="centered">EYE SHADOW</div>
+						</div>	</a>	
+						<a href="/product/26/"><div class="col-sm-3">
+							<img src="{% static 'bnbcvnbmcn.jpg' %}" style="width:300px;height:380px;">
+							<div class="centered">SUNGLASSES</div>
+						</div>								
+						<a href="/product/6/"><div class="col-sm-3">
+							<img src="{% static 'nbbcn.jpg' %}" style="width:300px;height:380px;">
+							<div class="centered">SUITS</div>
+						</div></a>
+					</div>
+				</div>
+			</div>
+			<a class="carousel-control left carousel-control-prev" href="#myCarousel" data-slide="prev">
+				<i class="fa fa-angle-left"></i>
+			</a>
+			<a class="carousel-control right carousel-control-next" href="#myCarousel" data-slide="next">
+				<i class="fa fa-angle-right"></i>
+			</a>
+		</div>
+		</div>
+	</div>
+	
+<br>
+<div class="row">
+<div class="col-md-12">
+<a href="/product/1/"><img src="{% static 'Screenshot (221).jpg' %}" style="width:100%;height:400px;"></a>
+</div>
+</div>
+<br>
+<br>
+<div class="row" style="background:rgba(53,158,128,0.1)">
+<br>
+<div class="container">
+<div class="col-md-6">
+<a href="/product/4/"><img src="{% static 'Screenshot (225).jpg' %}" style="width:100%;height:550px;"></a>
+</div>
+<div class="col-md-6">
+<a href="/product/24/"><img src="{% static 'Screenshot (226).jpg' %}" style="width:100%;height:550px;"></a>
+</div>
+</div>
+<br>
+</div>
+<br>
+<div class="row">
+<div class="col-md-12">
+<a href="/product/20/"><img src="{% static 'Screenshot (227).jpg' %}" style="width:100%;height:400px;"></a>
+</div>
+</div>
+<br>
+<!--end carousel top-->
+{% endblock %}

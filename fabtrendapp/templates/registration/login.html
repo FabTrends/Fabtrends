@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="row" id="form1">
+<div class="col-md-4 col-md-offset-4" id="form2">
+<div class="login-form">
+{% if messages %}
+            <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+		
+   <form action="{% url 'fabtrendapp:login' %}" method="POST" enctype="multipart/form-data">
+	{% csrf_token %}
+	{% if form.errors %}
+		<div class="alert alert-danger alart-dismissable" role ="alert">
+                <button class="close" data-dismiss="alert">
+                    <small><sup>x</sup></small>
+                  </button>
+                {% for field in form %}
+               	{% if field.errors %}
+               		{{field.errors}}
+               	{% endif %}
+               	{% endfor %}
+              </div>
+		{% endif %}
+	<h2 class="sig">Login With FabTrends</h2><br>
+		
+				<input type="text" class="form-control" placeholder="Username"  id="em1" name="username" required style="height:45px;">
+				<input type="password" class="form-control" placeholder="Password" id="em4" name="password" required>
+              <br>
+            <button type="submit" value="sign" class="btn btn-success btn-block" id="sign">login</button>
+         <div class="hint-text small" id="forget">New to FabTrends? <a href="{% url 'fabtrendapp:register' %}" class="text-success" style="outline:none;" id="forget1">Register</a>
+	 </div>
+ </form>
+   </div>
+	 </div>
+</div>
+
+{% endblock %}

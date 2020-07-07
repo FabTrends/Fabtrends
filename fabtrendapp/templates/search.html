@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% block title %}
+<title>{{ subcat.name }}</title>
+{% endblock %}
+<br>
+<div class="row" style="background:rgba(53,158,128,0.1); font-size:20px;">
+<div class="container">
+<h2 style="font-size:20px;padding:10px;">You have searched for:<b>"{{ query }}" </b></h2>
+</div>
+</div>
+<div class="row" id="product">
+{% for product in produ %}
+							<div class=" col-md-3">
+							<div class="agile_ecommerce_tab_left dresses_grid">
+							<div class="thumbnail">
+								<div class="hs-wrapper hs-wrapper2" style="width:100%;height:100%;">
+									<img src="/media/{{ product.image }}" alt=" " class="img-responsive"/>
+									<img src="/media/{{ product.image1 }}" alt=" " class="img-responsive"/>
+									<img src="/media/{{ product.image2 }}" alt=" " class="img-responsive"/>
+									<img src="/media/{{ product.image3 }}" alt=" " class="img-responsive"/>
+									<img src="/media/{{ product.image4 }}" alt=" " class="img-responsive"/>
+									</div>
+								<h5 id="productname">{{ product.name }}</h5>
+								<div class="simpleCart_shelfItem">
+									<p><i class="item_price productprice">Rs. {{ product.price }}</i><span class="productprice">Rs. {{ product.discounted_price }} </span> </p>
+									<form action='{% url "cart:cart_add" product.id %}' method="post">
+	{% csrf_token %}
+	<div class="cart">
+	{{ cart_product_form }}
+	<a><input type="submit" value="Add to cart" class="cartbutton1"></a>
+	</div>
+</form>
+<form action='{% url "fabtrendapp:productView" product.id %}' method="post" style="margin-top:0;">
+	{% csrf_token %}
+	{{ fabtrendapp_productview_form }}
+<a href="/fabtrendapp/products/{{product.id}}" style="margin-top:10px;"><input type="submit" class="cartbutton3" value="QuickView" id="qv{{product.id}}"></a>
+</form>
+								</div>
+								<div class="dresses_grid_pos">
+									<h6 style="text-align:center">{{ product.tag }}</h6>
+								</div>
+							
+				</div>
+				
+							</div>
+							
+</div>							
+{% empty %}
+<div class="row">
+<h1>0 result found</h1>
+</div>
+						{% endfor %}
+						</div>
+					
+{% endblock %}

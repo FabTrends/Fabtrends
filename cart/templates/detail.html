@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+     {% trans "Cart" %}
+{% endblock %}
+
+{% block content %}
+<div class="row" style="background:rgba(230, 232, 230,0.4);">
+ {% if cart|length > 0 %}
+	
+<div class="row" id="cart1">
+		<div class="container">
+        <h2 id="cart2"> Shopping Cart
+            <span class="badge pull-right" id="cart3">
+                {% with total_items=cart|length %}
+                    {% if cart|length > 0 %}
+                        My Shopping Order:
+                        <a href="{% url "cart:cart_detail" %}" style="color: #ffffff">
+                            {{ total_items }} item {{ total_items|pluralize }}, Rs. {{ cart.get_total_price }}
+                        </a>
+                        {% else %}
+                        Your cart is empty.
+                    {% endif %}
+                {% endwith %}
+            </span>
+        </h2>
+		<br>
+	
+		<div style="background:white;">
+            <table class="table table-hover">
+                <thead style="font-family:Arial Rounded MT;color:black;text-align:center;font-size:18px;">
+		         <tr style="font-color:white; text-align:center;left:20px;">
+                        <th>Image</th>
+                        <th>Product Name</th>
+                        <th>Quantity</th>
+						<th>Remove</th>
+                        <th>Unit Price</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for item in cart %}
+                    {% with product=item.product  %}
+                        <tr>
+                            <td>
+                                 
+                                    <img src="/media/{{ product.image}}" alt="..." style="height:120px; width:100px; margin-left:20px">
+                                 
+                            </td>
+                            <td><div id="cart4">{{ product.name }}</div></td>
+                            <td>
+                                <form action="{% url "cart:cart_add" product.id %}" method="post">
+                                    {% csrf_token %}
+                                    {{ item.update_quantity_form.quantity }}
+                                    {{ item.update_quantity_form.update }}
+                                    <input type="submit" value="Update" class="btn btn-info">
+                                </form>
+                            </td>
+                            <td id="cart5">
+							
+                                <a href="{% url "cart:cart_remove" product.id %}"><p style="color:white;text-decoration:none;outline:none;background:rgb(53,158,128);padding:5px;text-align:center;border-radius:5px;">Delete</p></a>
+                                
+                            </td>
+							
+                            <td id="cart6">Rs. {{ item.price }}</td>
+                            <td id="cart6">Rs. {{ item.total_price }}</td>
+                        </tr>
+						<tr>
+                   
+				
+                    {% endwith %}
+                {% endfor %}
+	
+        <tr class="total">
+            <td id="cart8">{% trans " Grand Total" %}</td>
+            <td colspan="4"></td>
+            <td class="num" id="cart8">
+            Rs. {{ cart.get_total_price }}
+            </td>
+        </tr>
+               
+		
+      </tbody>
+    </table>
+	</div>
+			<div class="row">
+			<div class="container">
+        <p class="text-right" id="cartbutton1" style="">
+            <a href="{% url "fabtrendapp:index" %}" class="btn btn-info" id="cartbutton1">Continue Shopping</a>
+			 <a href="{% url "orders:order_create" %}" class="btn btn-info"  id="cartbutton1">Checkout</a>
+			  <a onclick="return confirm('Dear Customer! Are You Sure You want to clear Your Cart Items')" class="clearcart btn btn-info" href="{% url "cart:cart_clear"  %}">Clear cart</a>
+         </p>
+        </div>
+        </div>
+    </div>
+    </div>
+
+	{% else %}
+            <div class="col-md-4 col-md-offset-4" style="margin-top:40px;margin-bottom:40px;">
+                <div class="text-center mx-md-auto">
+                    <i class="fas fa-cart-arrow-down h1" style="color:rgb(58,151,128); border:1px solid rgb(58,151,128); padding:20px; border-radius:40px;"></i>
+                </div>
+                <div class="text-center">
+                    <h3 class="pb-4">Your Cart is Currently Empty.</h3>
+                    <p class="text-center pb-2">Before proceed to checkout<br> you must add some products to your shopping
+                        cart.<br> You will find a lot of interesting products on our "Products" page.</p>
+                    <a href="{% url 'fabtrendapp:index' %}" class="btn btn-primary px-5">Start Shopping</a>
+                </div>
+            </div>
+        
+		{% endif %}
+		<br>
+    </div>
+                    
+					
+{% endblock %}

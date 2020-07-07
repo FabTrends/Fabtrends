@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block extrastyle %}
+    <link rel="stylesheet" type="text/css" href="{% static "css/admin.css" %}" />
+{% endblock %}
+
+{% block title %}
+Order {{ order.id }} {{ block.super }}
+{% endblock %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+<a href="{% url "admin:index" %}">Home</a> &rsaquo;
+<a href="{% url "admin:orders_order_changelist" %}">Orders</a>
+&rsaquo;
+<a href="{% url "admin:orders_order_change" order.id %}">Order {{
+order.id }}</a>
+&rsaquo; Detail
+</div>
+{% endblock %}
+
+{% block content %}
+<center>
+<div class="row">
+<div class="parallax1" id="image">
+<div class="col-md-12">
+<div  width="100%">
+<div>
+        <p style="top:60px;font-size:50px;margin-top:90px;background:black;padding:10px;color:white;text-align:center;font-family:Arial Rounded MT;">YOUR ORDER DETAIL</p>
+</div>	
+	
+		</div>
+
+</div>
+</div>
+</div>
+
+	<div class="row" style="margin-top:60px;">
+	<div class="col-md-8 col-md-offset-2">
+    <table class="table table-bordered table-hover" style=" border:1px solid black;font-family:Arial Rounded MT;font-size:18px;background:rgba(173, 167, 166,0.1);margin-bottom:50px;margin-top:0px;">
+	<h2 style="color:white;background:black;padding:10px;margin:0;font-family:Arial Rounded MT;">Your Order Address</h2>
+	 <tr>
+            <th style="padding-left:30px;margin-top:20px">Order ID  </th>
+            <td  style="padding-left:30px;">{{ order.id }}</td>
+        </tr>
+        <tr>
+            <th style="padding-left:30px;margin-top:20px">Order Date  </th>
+            <td  style="padding-left:30px;">{{ order.created }}</td>
+        </tr>
+        <tr>
+            <th  style="padding-left:30px; width:40%;">Customer Name  </th>
+            <td  style="padding-left:30px;">{{ order.first_name }} {{ order.last_name }}</td>
+        </tr>
+        <tr>
+            <th  style="padding-left:30px;">E-mail</th>
+            <td  style="padding-left:30px;color:black;"><a href="mailto:{{ order.email }}">{{ order.email }}</a></td>
+        </tr>
+        <tr>
+            <th style="padding-left:30px;">Phone Number</th>
+            <td style="padding-left:30px;">{{ order.phone_number }}</td>
+        </tr>
+        <tr>
+            <th style="padding-left:30px;">Address</th>
+			
+            <td style="padding-left:30px;"> {{ order.houseno}} {{ order.town }} {{ order.full_address }}
+                {{ order.city }} {{ order.state }} {{ order.country }} {{ order.postal_code }}.</td>
+        </tr>
+		  <tr>
+            <th style="padding-left:30px;">Address</th>
+			
+            <td style="padding-left:30px;">{{ order.postal_code }}</td>
+        </tr>
+        <tr>
+            <th style="padding-left:30px;">Delivery</th>
+            <td style="padding-left:30px;">Free</td>
+        </tr>
+        <tr>
+            <th style="padding-left:30px;">Status</th>
+            <td style="padding-left:30px;">{% if order.paid %}Paid{% else %}Pending payment{% endif %}</td>
+        </tr>
+    </table>
+	</div>
+	</div>
+	
+<div class="row">
+<div class="col-md-8 col-md-offset-2">
+   
+            <table class="table-bordered table-hover" style=" border:1px solid black;font-family:Arial Rounded MT;background:rgba(173, 167, 166,0.1);font-size:18px;margin-bottom:50px;width:100%;">
+               
+                <thead>
+				<h2 style="color:white;background:black;font-family:Arial Rounded MT;padding:10px;margin:0;">Your Order Items</h2>
+                    <tr>
+                        <th style="padding:10px; margin-left:30px;">Product</th>
+                        <th style="padding:10px; margin-left:30px;">Price</th>
+                        <th style="padding:10px; margin-left:30px;">Quantity</th>
+                        <th style="padding:10px; margin-left:30px">Total</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                {% for item in order.items.all %}
+                    <tr class="row{% cycle "1" "2" %}">
+                        <td style="padding:10px;margin-left:30px;">{{ item.product.name }}</td>
+                        <td class="num" style="padding:10px; margin-left:30px;">Rs. {{ item.price }}</td>
+                        <td class="num" style="padding:10px;margin-left:30px;">{{ item.quantity }}</td>
+                        <td class="num" style="padding:10px;margin-left:30px;">Rs. {{ item.get_cost }}</td>
+                    </tr>
+              {% endfor %}
+                    <tr class="total" style="color:white; font-size:22px;background:black; height:60px;margin-top:8px;margin-left:8px;">
+                        <td colspan="3" style="padding-left:15px;">Total Cost</td>
+                       
+                        <td class="num" style="padding-left:15px;color:white;">Rs. {{ order.get_total_cost|floatformat:"0" }}</td>
+                        
+						
+                    </tr>
+					  
+                </tbody>
+				
+            </table>
+			
+        </div>
+        </div>
+       
+  </center>
+{% endblock %}

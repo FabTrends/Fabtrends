@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+<div class="row" style="background:rgba(230, 232, 230,0.4);">
+<br><br>
+        <p style="background:rgba(53,158,128,0.6); color:white;padding:10px;text-align:center;font-size:40px;font-weight:bold;"> Your Wishlist</p>
+	</div>
+ 
+ <div class="row"  style="background:rgba(230, 232, 230,0.4);">
+ <br><br>
+  	<div class="container">
+            <table class="table table-bordered" style="background:white;" >
+                <thead style="font-family:Arial Rounded MT;color:black;text-align:center;font-size:18px;">
+		 <tr style="font-color:white; width:30px !important">
+						 <th style="text-align:center;">Remove</th>
+                        <th  style="text-align:center;">Image</th>
+                        <th  style="text-align:center;">Product Name</th>
+                        <th  style="text-align:center;">Unit Price</th>
+                        
+                        <th  style="text-align:center;">Add to Cart</th>
+						
+                       
+                    </tr>
+                </thead>
+                <tbody>
+				 
+		{% for value in wishlists %}
+		 
+			        <tr><td  style="text-align:center;"><a href="{% url "wishlists:delete_wishlist" value.id %}"><i class="fa fa-trash" aria-hidden="true" style="color:rgb(53,158,128);font-size:40px;margin-top:30px;"></i></a></td>
+					<td  style="text-align:center;"><img src="/media/{{ value.image}}" alt="..." style="height:120px; width:120px;"></td>
+                            <td  style="text-align:center;padding-top:30px;font-family:Arial Rounded MT;">{{ value.name }}</td>
+                        <td  style="text-align:center;padding-top:30px;font-family:Arial Rounded MT;">Rs. {{ value.price }}</td>
+						
+			<form action="{% url "cart:cart_add" value.id %}" method="post">
+                                    {% csrf_token %}
+                                  
+                                  <td  style="text-align:center;margin-top:30px;"> <input  style="text-align:center;margin-top:30px;" type="submit" value="Add to cart" class="cartbutton1"></td>
+								  {{ cart_product_form }}
+</form>  
+						
+	 </tr>
+                {% endfor %}
+</tbody>
+		</table>
+		
+		 <a href="{% url "wishlists:clear_wishlists" %}" class="btn btn-info"  style="float:right;margin-bottom:30px;margin-left:10px;" >Clear wishlists</a>
+		 <a href="{% url "fabtrendapp:index" %}" style="float:right;" class="btn btn-info" id="cartbutton1">Continue Shopping</a>
+	</div>		
+	</div>		
+
+ 
+{% endblock %}
+
+

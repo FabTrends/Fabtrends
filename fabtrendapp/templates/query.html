@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+<div class="row" id="anyquery">
+<div class="parallax">
+
+<div class="container-fluid" style="padding-top:20px;">
+    <div class="col-md-6 col-md-offset-3 form-container" style="padding:20px; background:rgba(150, 23, 23,0.3);color:white;border-radius:30px;padding:50px;color:white;">  
+        <h2 style="text-align:center; margin-top:0px;font-family:Arial Rounded MT;"><b>Any Query?</b></h2>
+        
+        <form action="/insertquery/" method="post">
+{% csrf_token %}
+            <div class="row">
+                <div class="col-sm-12 form-group">
+                <label>Ask any query about our FabTrends</label>
+                
+                </div>
+            </div>  
+            
+            <div class="row" style="font-size:18px;font-family:Arial Rounded MT;">
+                <div class="col-sm-6 form-group">
+                    <label for="name">
+                        Your Name:</label>
+                    <input type="text" class="form-control" id="name" name="name" required>
+                </div>
+                <div class="col-sm-6 form-group">
+                    <label for="email">
+                        Phone No:</label>
+                    <input type="text" class="form-control" id="phone" name="phone" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 form-group" style="font-family:Arial Rounded MT;font-size:18px;">
+                    <label for="comments">
+                     Ask  Query:</label>
+                    <textarea class="form-control" type="textarea" name="query" id="query" placeholder="Your Query" maxlength="5000" rows="6"></textarea>
+                </div>
+            </div>
+                        <div class="row">
+                <div class="col-sm-12 form-group">
+                    <button type="submit" class="btn btn-lg btn-info btn-block" style="color:rgb(53,158,128);color:white;font-family:Arial Rounded MT;font-size:20px;border:none;">SEND</button>
+                </div>
+            </div>
+
+        </form>
+<div id="success_message" style="width:100%; height:100%; display:none; ">
+            <h3>Posted your feedback successfully!</h3>
+        </div>
+        <div id="error_message" 
+                style="width:100%; height:100%; display:none;">
+                    <h3>Error</h3>
+                    Sorry there was an error sending your form.
+
+        </div>          
+</div>
+</div>
+</div>
+</div>
+
+<script>
+$(function()
+{
+    function after_form_submitted(data)
+    {
+        if(data.result == 'success')
+        {
+            $('form#reused_form').hide();
+            $('#success_message').show();
+            $('#error_message').hide();
+        }
+        else
+        {
+            $('#error_message').append('<ul></ul>');
+
+            jQuery.each(data.errors,function(key,val)
+            {
+                $('#error_message ul').append('<li>'+key+':'+val+'</li>');
+            });
+            $('#success_message').hide();
+            $('#error_message').show();
+
+            //reverse the response on the button
+            $('button[type="button"]', $form).each(function()
+            {
+                $btn = $(this);
+                label = $btn.prop('orig_label');
+                if(label)
+                {
+                    $btn.prop('type','submit' );
+                    $btn.text(label);
+                    $btn.prop('orig_label','');
+                }
+            });
+
+        }//else
+    }
+
+	$('#reused_form').submit(function(e)
+      {
+        e.preventDefault();
+
+        $form = $(this);
+        //show some response on the button
+        $('button[type="submit"]', $form).each(function()
+        {
+            $btn = $(this);
+            $btn.prop('type','button' );
+            $btn.prop('orig_label',$btn.text());
+            $btn.text('Sending ...');
+        });
+
+
+                    $.ajax({
+                type: "POST",
+                url: 'handler.php',
+                data: $form.serialize(),
+                success: after_form_submitted,
+                dataType: 'json'
+            });
+
+      });
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+  
+	{% endblock %}

@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% block title %}
+<title>{{ subcat.name }}</title>
+{% endblock %}
+<!--<div class="row">
+<div class="parallax3">
+		<img src="/media/{{ subcat.image }}" id="center1">
+		<di
+        <p style="position:absolute; top: 45%;">{{ subcat.name }}</p>
+</div>
+</div>-->
+<div class="row">
+
+<div class="col-md-12">
+<div width="100%">
+<img src="/media/{{ subcat.image }}" id="center1" style="height:380px;">
+        <p id="mostly" style="top:90px;">{{ subcat.name }}</p>
+		
+		</div>
+
+</div>
+</div>
+   <!-- position: absolute;
+    top: 45%;
+    left: 35%;
+    background-color: black;
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 70px;
+    font-weight: bold;
+    letter-spacing: 5px;
+    text-align: center;-->
+<div class="row" id="product">
+{% for prod in pro %}
+							<div class=" col-md-3">
+							<div class="agile_ecommerce_tab_left dresses_grid">
+							<div class="thumbnail">
+								<div class="hs-wrapper hs-wrapper2" style="width:100%;height:100%;">
+									<img src="/media/{{ prod.image }}" alt=" " class="img-responsive"/>
+									<img src="/media/{{ prod.image1 }}" alt=" " class="img-responsive"/>
+									<img src="/media/{{ prod.image2 }}" alt=" " class="img-responsive"/>
+									<img src="/media/{{ prod.image4 }}" alt=" " class="img-responsive"/>
+								</div>
+								<h5 id="productname">{{ prod.name }}</h5>
+								<div class="simpleCart_shelfItem">
+									<p><i class="item_price productprice">Rs. {{ prod.price }}</i><span class="productprice">Rs. {{ prod.discounted_price }} </span> </p>
+									<form action='{% url "cart:cart_add" prod.id %}' method="post">
+	{% csrf_token %}
+	<div class="cart">
+	{{ cart_product_form }}
+	<a><input type="submit" value="Add to cart" class="cartbutton1"></a>
+	</div>
+</form>
+<form action='{% url "fabtrendapp:productView" prod.id %}' method="post" style="margin-top:0;">
+	{% csrf_token %}
+	{{ fabtrendapp_productview_form }}
+<a href="/fabtrendapp/products/{{prod.id}}" style="margin-top:10px;"><input type="submit" class="cartbutton3" value="QuickView" id="qv{{prod.id}}"></a>
+</form>
+
+
+								</div>
+								<div class="dresses_grid_pos">
+									<h6 style="text-align:center">{{ prod.tag }}</h6>
+								 <br>
+								 <br>
+								 <br>
+								 <br>
+								 <br>
+								 <br>
+								 <br>
+								 <br>
+								 <br>
+								 <br>
+								 <br>
+								
+								  <a  style="margin-left:50px;" data-toggle="tooltip" title="Add to Wishlist" href="{% url "wishlists:add_wishlist" prod.id %}"><i  style="font-size:25px;padding-right:10px !important;color:rgb(58,151,128);"class="fa fa-heart"></i></a>
+								</div>
+								
+								
+								
+				</div>
+							</div>
+</div>							
+						{% endfor %}
+						</div>
+
+
+				
+						
+{% endblock %}

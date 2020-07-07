@@ -1,0 +1,270 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% load i18n %}
+<style>
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 10px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.6);
+}
+.model img {height:100%;width:100%;}
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  width: 70%;
+  height: auto;
+  max-width: 900px;
+  
+}
+
+/* The Close Button */
+.close {
+  color: black;
+  position: absolute;
+  top: 2%;
+  right: 2%;
+  font-size: 35px;
+  font-weight: bold;
+  background-color:white;
+  padding:20px;
+  cursor:pointer;
+  opacity:1 !important;
+}
+
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+  background:white;
+}
+.mySlides {
+  display: none;
+}
+
+.cursor {
+  cursor: pointer;
+}
+
+/* Next & previous buttons */
+.prev,
+.next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 20px;
+  margin-top: -50px;
+  background:white;
+  color: black;
+  font-weight: bold;
+  font-size: 30px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+  -webkit-user-select: none;
+  outline:none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover,
+.next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+  color:white;
+}
+ 
+.demo {
+  opacity: 0.6;
+}
+
+.active,
+.demo:hover {
+  opacity: 1;
+}
+
+.zoom-effect-container {
+    float: left;
+    position: relative;
+    width: 300px;
+    height: 450px;
+    margin-right:5px;
+    overflow: hidden;
+	margin-bottom:5px;
+	margin-left:5px;
+	margin-top:5px;
+}
+
+.image-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  
+}
+
+.image-card img {
+  -webkit-transition: 0.4s ease;
+  transition: 0.4s ease;
+}
+
+.zoom-effect-container:hover .image-card img {
+  -webkit-transform: scale(1.08);
+  transform: scale(1.08);
+}
+
+</style>
+<div class="row" style="margin-left:30px;margin-top:20px;">
+<div class="col-md-7" id="image-card">
+{% for prod in products %}
+<div class="zoom-effect-container">
+  <div class="image-card">
+<img src="/media/{{ prod.image }}" id="center" class="imagen" onclick="openModal();currentSlide(1)">
+</div>
+</div>
+<div class="zoom-effect-container">
+  <div class="image-card">
+<img src="/media/{{ prod.image1 }}" id="center" class="imagen" onclick="openModal();currentSlide(2)">
+</div>
+</div>
+<div class="zoom-effect-container">
+  <div class="image-card">
+<img src="/media/{{ prod.image2 }}" id="center" class="imagen" onclick="openModal();currentSlide(3)">
+</div>
+</div>
+
+<div class="zoom-effect-container">
+  <div class="image-card">
+<img src="/media/{{ prod.image4 }}" id="center" class="imagen" onclick="openModal();currentSlide(5)" onerror="this.onerror=null; this.remove();">
+</div>
+</div>
+</div>
+<div id="myModal" class="modal">
+  <div class="modal-content">
+	<button class="close"><span class="close cursor" onclick="closeModal()">&times;</span></button>
+	<div id="picture-frame">
+	<div class="mySlides"><img src="/media/{{ prod.image }}" style="width:100%;height:1000px;" id="zoom_05"></div>
+	<div class="mySlides"><img src="/media/{{ prod.image1 }}" style="width:100%;height:1000px;" id="zoom_05"></div>
+	<div class="mySlides"><img src="/media/{{ prod.image2 }}" style="width:100%;height:1000px;" id="zoom_05"></div>
+    <div class="mySlides"><img src="/media/{{ prod.image4 }}"  onerror="this.onerror=null; this.remove(); " id="zoom_05" style="width:100%;height:1000px;"></div>
+	<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+	</div>
+	</div>
+</div>
+<div class="col-md-5">
+<div id="product">
+<p style="color:black;font-family:Arial Rounded MT;font-weight:bold;font-size:25px;">{{prod.productbrand}}</p>
+<p style="color:rgb(53,158,128);font-family:Arial Rounded MT;font-weight:bold;font-size:20px;">{{prod.name}}</p><hr>
+    <p style="color:black;font-size:25px;font-family:Arial Rounded MT;font-weight:bold;">Rs.{{prod.price}} <del style="margin-left:14px;color:rgb(128, 123, 122);font-family:Arial Rounded MT;font-weight:bold;font-size:20px;">Rs. {{prod.discounted_price}}</del><b style="color:rgb(53, 158, 128);margin-left:14px;font-size:15px;font-family:Arial Rounded MT;font-weight:bold;">inclusive of all taxes</b></p>
+<hr>
+
+<div class="row">
+<div class="col-md-7">
+<form action='{% url "cart:cart_add" prod.id %}' method="post">
+	{% csrf_token %}
+	<div class="cart" style="margin-left:20px;font-size:14px;bottom:0;">
+	{{ cart_product_form }}
+	<a><input type="submit" value="Add to cart" class="cartbutton1"></a>
+	</div>
+</form>
+</div>
+</div>
+<hr>
+<h4 style="font-family:Arial Rounded MT;font-weight:bold;color:rgb(53, 158, 128);">BEST OFFERS </h4>
+<h5 style="font-family:Arial Rounded MT;font-weight:bold;">This product is already at its best price</h5><hr>
+<h4 style="font-family:Arial Rounded MT;font-weight:bold;color:rgb(53, 158, 128);">PRODUCT DETAILS </h4>
+<h5 style="font-family:Arial Rounded MT;font-weight:bold;">{{prod.description}}</h5><hr>
+<h4 style="font-family:Arial Rounded MT;font-weight:bold;color:rgb(53, 158, 128);">Size & Fit</h4>
+<h5 style="font-family:Arial Rounded MT;font-weight:bold;">{{prod.size}}</h5><hr>
+<h4 style="font-family:Arial Rounded MT;font-weight:bold;color:rgb(53, 158, 128);">Material & Care</h4>
+<h5 style="font-family:Arial Rounded MT;font-weight:bold;">{{prod.material}}</h5><hr>
+<h4 style="font-family:Arial Rounded MT;font-weight:bold;color:rgb(53, 158, 128);">Specifications</h4>
+<div class="col-md-6">
+<p style="font-family:Arial Rounded MT;font-weight:bold;font-size:14px;color:rgb(53, 158, 128);">Type</p>
+<h5 style="font-family:Arial Rounded MT;font-weight:bold;">{{prod.Type}}</h5><hr>
+<p style="font-family:Arial Rounded MT;font-weight:bold;font-size:14px;color:rgb(53, 158, 128);">Pattern</p>
+<h5 style="font-family:Arial Rounded MT;font-weight:bold;">{{prod.pattern}}</h5><hr>
+<p style="font-family:Arial Rounded MT;font-weight:bold;font-size:14px;color:rgb(53, 158, 128);">Color</p>
+<h5 style="font-family:Arial Rounded MT;font-weight:bold;">{{prod.color}}</h5><hr>
+<p style="font-family:Arial Rounded MT;font-weight:bold;font-size:14px;color:rgb(53, 158, 128);">Category</p>
+<h5 style="font-family:Arial Rounded MT;font-weight:bold;">{{prod.subcategory}}</h5><hr>
+</div>
+<div class="col-md-6">
+<p style="font-family:Arial Rounded MT;font-weight:bold;font-size:14px;color:rgb(53, 158, 128);">Stock</p>
+<h5 style="font-family:Arial Rounded MT;font-weight:bold;">{{prod.quantity}}</h5><hr>
+<p style="font-family:Arial Rounded MT;font-weight:bold;font-size:14px;color:rgb(53, 158, 128);">Occasion</p>
+<h5 style="font-family:Arial Rounded MT;font-weight:bold;">{{prod.Occasion}}</h5><hr>
+<p style="font-family:Arial Rounded MT;font-weight:bold;font-size:14px;color:rgb(53, 158, 128);">Size</p>
+<h5 style="font-family:Arial Rounded MT;font-weight:bold;">{{prod.size}}</h5><hr>
+<p style="font-family:Arial Rounded MT;font-weight:bold;font-size:14px;color:rgb(53, 158, 128);">Tag</p>
+<h5 style="font-family:Arial Rounded MT;font-weight:bold;">{{prod.tag }}</h5><hr>
+
+</div><br>
+<div class="row">
+<div class="col-md-12">
+<p style="font-family:Arial Rounded MT;font-weight:bold;font-size:14px;color:rgb(53, 158, 128);">Features</p>
+<h5 style="font-family:Arial Rounded MT;font-weight:bold;">{{prod.Features}}</h5><hr>
+</div>
+</div>
+
+</div>
+{% endfor %}
+</div>
+</div>
+
+
+
+<script>
+function openModal() {
+  document.getElementById("myModal").style.display = "block";
+}
+
+function closeModal() {
+  document.getElementById("myModal").style.display = "none";
+}
+
+var slideIndex = 1;
+showSlides(slideIndex);
+
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("demo");
+  var captionText = document.getElementById("caption");
+  if (n > slides.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].mySlides.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";
+}
+</script>
+{% endblock %}

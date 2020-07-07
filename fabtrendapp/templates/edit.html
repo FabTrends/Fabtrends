@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="row" id="form1">
+<div class="col-md-4 col-md-offset-4" id="form2">
+<div class="login-form">
+   <form action = "/edit/{{con.id }}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+		<h2 class="sig">Contact To FabTrends</h2><br>
+		<input type="text" placeholder="enter your name"  id="em1" pattern="[A-Za-z]*" required class="form-control" name="name" value="{{ con.name }}"/>
+<input type="tel" placeholder="enter your phoneno"  id="em5" pattern="[0-9]{10}*" class="form-control" name="phoneno" value="{{ con.phoneno }}"/>
+<input type="Email" placeholder="enter your email" class="form-control" name="email" id="em5" value="{{ con.email }}"/>
+<textarea class="form-control" placeholder="enter your message" name="message" id="em4" value="{{ con.message }}"></textarea>
+	<br>
+     <button type="submit" class="btn btn-success btn-block" id="sign">Submit</button>
+
+   </form>
+   </div>
+	 </div>
+</div>
+{% endblock %}

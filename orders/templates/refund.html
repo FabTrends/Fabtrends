@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<style type="text/css">
+  html,
+  body,
+  header,
+  .carousel {
+    height: 60vh;
+  }
+
+  @media (max-width: 740px) {
+
+    html,
+    body,
+    header,
+    .carousel {
+      height: 100vh;
+    }
+  }
+
+  @media (min-width: 800px) and (max-width: 850px) {
+
+    html,
+    body,
+    header,
+    .carousel {
+      height: 100vh;
+    }
+  }
+
+#refunds input[type=text]{color:black;font-family:Arial Rounded MT; width:625px;font-size:16px;border-radius:5px;border:1px solid rgba(0,0,0,0.3);padding:4px;padding-left:20px;margin-bottom:8px;margin-bottom:25px;}
+
+#refunds input[type=email]{color:black;font-family:Arial Rounded MT; width:625px;font-size:16px;border-radius:5px;padding:4px;padding-left:20px;margin-bottom:8px;border:1px solid rgba(0,0,0,0.3);}
+.textarea {color:black;font-family:Arial Rounded MT; width:625px;font-size:16px;border-radius:5px;padding:4px;padding-left:20px;margin-bottom:8px;border:1px solid rgba(0,0,0,0.3);}
+.control-label {color:black;font-family:Arial Rounded MT; width:625px;font-size:16px;border-radius:5px;padding:4px;padding-left:20px;margin-bottom:8px;}
+</style>
+
+<div class="row">
+<div class="parallax1" id="image">
+<div class="col-md-6 col-md-offset-3" style="font-size:60px;font-weight:bold;color:white;font-family:Arial Rounded MT;background:black;padding:10px;text-align:center;margin-top:60px;top:15%;">
+
+
+        <p>REQUEST REFUND</p>
+		
+		</div>
+</div>
+</div>
+<!--Main layout-->
+<main>
+<div class="row" style="background:rgba(179, 170, 170,0.1);">
+<br><br><br>
+  <div class="col-md-6 col-md-offset-3">
+    <div class="table-responsive text-nowrap">
+     
+        <form method="POST" id="refunds">
+		{% csrf_token %}
+            {{ form|crispy}}
+            <button type="submit" style="margin-top:20px;margin-bottom:20px;font-family:Arial Rounded MT;text-align:center;margin-left:37%;padding:5px 40px 5px 40px; font-size:20px;outline:none;border:none;" class="btn btn-primary">Submit</button>
+        </form>
+
+    </div>
+
+  </div>
+</main>
+<!--Main layout-->
+
+{% endblock content %}

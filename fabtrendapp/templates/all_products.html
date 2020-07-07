@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{title}}
+{% endblock title %}
+
+
+
+{% block content %}
+
+<div class="row" id="product">
+  {% for p in products %}
+  
+	 <div class=" col-md-3">
+							<div class="agile_ecommerce_tab_left dresses_grid">
+							<div class="thumbnail">
+								<div class="hs-wrapper hs-wrapper2" style="width:100%;height:100%;">
+									<img src="/media/{{ p.image }}" alt=" " class="img-responsive"/>
+									<img src="/media/{{ p.image1 }}" alt=" " class="img-responsive"/>
+									<img src="/media/{{ p.image2 }}" alt=" " class="img-responsive"/>
+									<img src="/media/{{ p.image3 }}" alt=" " class="img-responsive"/>
+									<img src="/media/{{ p.image4 }}" alt=" " class="img-responsive"/>
+								</div>
+								<h5 id="productname">{{ p.name }}</h5>
+								<div class="simpleCart_shelfItem">
+									<p><i class="item_price productprice">Rs. {{ p.price }}</i><span class="productprice">Rs. {{ p.discounted_price }} </span> </p>
+									<form action='{% url "cart:cart_add" p.id %}' method="post">
+	{% csrf_token %}
+	<div class="cart">
+	{{ cart_product_form }}
+	<a><input type="submit" value="Add to cart" class="cartbutton1"></a>
+	</div>
+</form>
+<form action='{% url "fabtrendapp:productView" p.id %}' method="post" style="margin-top:0;">
+	{% csrf_token %}
+	{{ fabtrendapp_productview_form }}
+<a href="/fabtrendapp/products/{{p.id}}" style="margin-top:10px;"><input type="submit" class="cartbutton3" value="QuickView" id="qv{{p.id}}"></a>
+</form>
+
+
+								</div>
+								<div class="dresses_grid_pos">
+									<h6 style="text-align:center">{{ p.tag }}</h6>
+								 <br>
+								 <br>
+								 <br>
+								 <br>
+								 <br>
+								 <br>
+								 <br>
+								 <br>
+								 <br>
+								 <br>
+								 <br>
+								
+								  <a  style="margin-left:50px;"href="{% url "wishlists:add_wishlist" p.id %}"><i  style="font-size:25px;padding-right:10px !important;color:rgb(58,151,128);"class="fa fa-heart"></i></a>
+								</div>
+								
+								
+								
+				</div>
+							</div>
+</div>							
+  {% endfor %}
+</div>
+<div class="row">
+<div class="container" style="text-align:center;color:rgb(53,151,128);">
+       <div class="mx-auto mt-4 clearfix">
+
+          {% if products.has_other_pages %}
+
+            <ul class="pagination">
+               {% if products.has_previous %}
+                  <li class="page-item" >
+                    <a href="?page={{products.previous_page_number}}" class="page-link">&laquo;</a>
+                  </li>
+               {% else %}
+                   <li class="page-item disabled">
+                      <a class="page-link">&laquo;</a>
+                   </li>
+               {% endif %}
+               {% for i in products.paginator.page_range %}
+                 {% if products.number == i %}
+
+                  <li class="page-item active">
+                    <a class="page-link">{{i}}</a>
+                  </li>
+                 {% else %}
+                      <li class="page-item">
+                        <a href="?page={{i}}" style="text-align:center;color:rgb(53,151,128);" class="page-link">{{i}}</a>
+                      </li>
+                 {% endif %}
+               {% endfor %}
+               {% if products.has_next %}
+                  <li class="page-item">
+                    <a href="?page={{products.next_page_number}}" class="page-link">&raquo;</a>
+                  </li>
+               {% else %}
+                   <li class="page-item disabled">
+                      <a class="page-link">&raquo;</a>
+                   </li>
+               {% endif %}
+            </ul>
+
+          {% else %}
+
+          {% endif %}
+
+  </div>
+  </div>
+  </div>
+
+
+
+{% endblock content %}
+
+

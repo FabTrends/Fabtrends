@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Email Sent" %}{% endblock %}
+
+{% block content %}
+  <br>
+    <div class="container" style="background:rgba(212, 209, 201,0.5);">
+<center>
+    <div class="row"
+        <div class="jumbotron">
+        <h1 class="display-3" style="margin-bottom:30px;margin-top:40px;">{% trans "Message Sent" %}</h1>
+      <p class="lead" style="margin-bottom:30px;">
+           {% trans "Your Message was sent successfully ! We will get back to you as soon as possible. Thank You !!" %}
+        </p>
+        <p style="margin-bottom:40px;"><a class="btn btn-lg btn-info" style="padding:10px;" href="{% url 'fabtrendapp:index' %}" role="button">{% trans "Go Back To HomePage" %}</a></p>
+      </div>
+     </center>
+    </div>
+<br>
+{% endblock %}>

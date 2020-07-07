@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+   {% trans "Checkout" %}
+{% endblock %} 
+
+{% block content %}
+<div class="row">
+<div class="parallax1" id="image">
+<div class="col-md-12">
+<div  width="100%">
+
+        <p id="mostly" style="top:90px;">CHECK OUT</p>
+		
+		</div>
+
+</div>
+</div>
+</div>
+<div class="row">
+    <div class="container">
+        <div class="row" style="margin-top: 6%;">
+            <div class="col-md-6"style="background:white; margin-bottom:30px;">
+           	
+				 <form action="." method="post" id="pages1">
+                    {% csrf_token %}
+                    <table>
+    {{ form.as_table }}
+	
+
+  </table>
+  <input type="submit" class="btn btn-primary" value="{% trans "Place order" %}" style="width:300px; text-align:center;font-family:Arial Rounded MT; font-size:18px; border:none; margin-left:20%;outline:none;">
+  </form>
+  
+  </div>
+  
+			<div class="col-md-1">
+			</div>
+            <div class="col-md-5">
+                <div class="pages">
+                    Your Order
+					 <span class="badge pull-right" id="cart3">
+                {% with total_items=cart|length %}
+                    {% if cart|length > 0 %}
+                        <a href="{% url "cart:cart_detail" %}" style="color: #ffffff">
+                            {{ total_items }} item 
+                        </a>
+                        {% else %}
+                        Your cart is empty.
+                    {% endif %}
+                {% endwith %}
+            </span>
+                </div>
+				
+              
+                    
+					
+            <ul class="list-group">
+                    {% for item in cart %}
+                        <li class="list-group-item">
+                        <span style="margin-left:6px;margin-right:6px;font-family:Arial Rounded MT;font-size:16px;">{{ item.quantity }}</span>
+						<span style="margin-left:6px;margin-right:6px;font-family:Arial Rounded MT;font-size:16px;">{{ item.product.name }}</span>
+                        <span style="margin-left:6px;margin-right:6px;font-family:Arial Rounded MT;font-size:16px;float:right;">Rs. {{ item.total_price }}</span>
+                        </li>
+                    {% endfor %}
+					<li class="list-group-item active" style="color:white; font-size:22px;background:black;">Total: <p style="float:right">Rs. {{ cart.get_total_price }}</p></li>
+					</ul>
+					<br>
+					<ul class="list-group">
+   {% if cart.coupon %}
+   <div class="pages">
+                    Coupon:
+                </div>
+            <li class="list-group-item">
+                <span style="margin-left:6px;margin-right:6px;font-family:Arial Rounded MT;font-size:16px;">{% blocktrans with code=cart.coupon.code discount=cart.coupon.discount %}
+                        "{{ code }}" ({{ discount }}% off)
+                    {% endblocktrans %}</span>
+                <span style="margin-left:6px;margin-right:6px;font-family:Arial Rounded MT;font-size:16px;float:right;" >- Rs. {{ cart.get_discount }}</span>
+            </li>
+        
+               
+                <li class="list-group-item active" style="color:white; font-size:22px;background:black;">Total Cost: <p style="float:right">Rs. {{ cart.get_total_price_after_discount }}</p></li>
+				{% endif %}
+			</ul>
+            </div>
+        
+        </div>
+    </div>
+    </div>
+    
+{% endblock %}

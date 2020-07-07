@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="row">
+<div  class="parallax2" id="about">
+
+        <p id="mostly">FAQs</p>
+		
+		</div>
+		</div><br><br>
+		<div class="row">
+		<div class="container">
+		{% for FAQs in object_list %}
+			
+          <p id="question">Question: {{FAQs.question}}</p>
+       
+			<p id="answer">Answer: {{FAQs.answer}}</p><hr>
+			
+			{% endfor %}
+      </div>
+    </div>
+
+		
+	
+{% endblock %}

@@ -1,0 +1,54 @@
+{% load static %}
+<html>
+  <body>
+ 
+    <p style="font-family:Arial Rounded MT;text-align:center;font-size:20px;font-weight:bold;">FabTrends Women's shopping store</p>
+    <p style="font-family:Arial Rounded MT;text-align:center;margin-top:0px;"></p>
+	<br>
+    <p>
+      Invoice no. {{ order.id }}
+      <span class="secondary" style="float:right">
+        {{ order.created|date:"M d, Y" }}
+      </span>
+    </p><br>
+    <h3>Bill to</h3>
+    <p>
+      {{ order.first_name }} {{ order.last_name }}<br>
+      {{ order.email }}<br>
+	  {{ order.phone_number }}<br>
+     {{ order.houseno}} {{ order.town }}
+                {{ order.city }} {{ order.state }} {{ order.country }} {{ order.postal_code }}.<br>
+     
+	   {{ order.full_address }}.<br>
+	   
+    </p><br>
+    <h3>Your Order Items</h3>
+    <table>
+      <thead>
+        <tr>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Cost</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in order.items.all %}
+          <tr class="row{% cycle "1" "2" %}">
+            <td>{{ item.product.name }}</td>
+            <td class="num">Rs. {{ item.price }}</td>
+            <td class="num">{{ item.quantity }}</td>
+            <td class="num">Rs. {{ item.get_cost }}</td>
+          </tr>
+        {% endfor %}
+        <tr class="total">
+          <td colspan="3">Total</td>
+          <td class="num">Rs. {{ order.get_total_cost }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <span class="{% if order.paid %}paid{% else %}pending{% endif %}">
+      {% if order.paid %}Paid{% else %}Pending payment{% endif %}
+    </span>
+  </body>
+</html>

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+ 
+<div class="row text-center mainheading">
+<h1>SubCategories</h1>
+</div>
+ 
+<div class="row text-center">
+{% for subcategory in object_list %}
+<li><a href="/product/{{ subcategory.id }}" id="gift" >{{ subcategory.name }}</a></li>
+{% endfor %}
+</div>
+{% endblock %}

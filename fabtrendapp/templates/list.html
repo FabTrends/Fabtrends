@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="row" style="margin-top:0">
+<h1 id="feedback1">Contacts List</h1>
+</div>
+
+<div class="row">
+<div class="container" style="background:rgba(212, 209, 201,0.3);margin-top:40px;margin-bottom:40px;">
+
+<table class="table">
+<tr>
+<th>Srno</th>
+<th>Name</th>
+<th>Phone number</th>
+<th>Email</th>
+<th>Subject</th>
+<th>Message</th>
+<th>Delete</th>
+<th>Update</th>
+</tr>
+{% for con in object_list %}
+<tr>
+
+<td>{{ con.id }}</td>
+<td>{{ con.name }}</td>
+<td>{{ con.phoneno }}</td>
+<td>{{ con.email }}</td>
+<td>{{ con.subject }}</td>
+<td>{{ con.message }}</td>
+
+<td><a href="/delete/{{ con.id }}"><button class="cartbutton1">Delete</button></a></td>
+<td><a href="/edit/{{ con.id }}"><button class="cartbutton1">Edit</button></a></td>
+</tr>
+
+{% endfor %}
+
+</table>
+</div>
+</div>
+
+{% endblock %}
+
+
